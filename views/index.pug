@@ -1,0 +1,202 @@
+html    
+    head(lang="pl")
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
+        link(rel="stylesheet" href="css/library.css")
+        link(rel="stylesheet" href="css/main.css")
+        script(src="/js/index.js")
+    body.bg-gray-100
+        header.container.mx-auto
+            h1.mt-8.mb-8.text-4xl.text-center Wniosek inwestycyjny
+        main.w-full.max-w-xxl.container.mx-auto
+            form.bg-white.shadow-md.rounded.px-8.pt-6.pb-8.mb-4.form.block.text-gray-700.text-sm.font-bold(action="/application" method="POST" id="create-application")
+                .form__row.mb-4.mt-2
+                    label.form__label.mb-2 Data wniosku (rrrr,mm,dd):
+                    input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="2021.08.24" type="text" name="date" required)
+                .form__row.mb-4.mt-2
+                    label.form__label.mb-2 Tryb wniosku:
+                    .form__radio.ml-2
+                        label.inline-flex.items-center
+                            input.form__input.form-radio(type="radio" name="mode" value="Do planu rocznego" data-mode-input required)
+                            span.radio__text.ml-2 Do planu rocznego
+                    .form__radio.ml-2
+                        label.inline-flex.items-center
+                            input.form__input.form-radio(type="radio" name="mode" value="Poza planem rocznym" data-mode-input required)
+                            span.radio__text.ml-2 Poza planem rocznym
+                .form__row.mb-4.mt-2   
+                    label.form__label.mb-2(data-mode) Uzasadnienie dla wniosku poza planem rocznym:
+                    textarea(class="form__textarea w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="3" name="mode_description" required placeholder="Nagła potrzeba wynikająca z...")
+                .form__row.mb-4.mt-2    
+                    label.form__label.mb-2 Miejsce użytkowania:
+                    input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="place_1" placeholder="Klinika/Zakład/Dział" required)
+                .form__row.mb-4.mt-2
+                    label.form__label.mb-2 Oddział wykorzystania:
+                    input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="place_2" placeholder="Oddział/Pracownia/Poradnia/Sekcja" required)
+                .form__row.mb-4.relative.inline-block.w-full.text-gray-700
+                    label.form__label.mb-2 Kategoria przedmiotu wniosku:
+                    select(class="form__select w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" name="category" required)
+                        option(selected disabled) Wybierz kategorię
+                        option(value="Aparatura/Wyposażenie medyczne") Aparatura/Wyposażenie medyczne
+                        option(value="Urządzenia biurowe") Urządzenia biurowe
+                        option(value="Urządzenia informatyczne/oprogramowanie") Urządzenia informatyczne/oprogramowanie
+                        option(value="Wyposażenie niemedyczne") Wyposażenie niemedyczne
+                        option(value="Remont/modernizacja pomieszczeń") Remont/modernizacja pomieszczeń
+                        option(value="inna") inna
+                    .absolute.inset-y-0.right-0.flex.items-center.px-2.pointer-events-none
+                        svg.w-4.h-4.fill-current(viewBox="0 0 20 20")
+                            path(d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd")
+                .form__row.mb-4.mt-2    
+                    label.form__label.mb-2 Nazwa, opis przedmiotu wniosku:
+                    textarea(class="form__textarea w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="3" name="name_description" required placeholder="Urządzenie XYZ... stosowane do...")
+                .form__row.mb-4.mt-2
+                    label.form__label.mb-2 Liczba sztuk:
+                    input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="amount" placeholder="3" min="1" max="999999999999" required)
+                .form__row.mb-4.mt-2
+                    label.form__label.mb-2 Orientacyjna łączna wartośc (zł brutto):
+                    input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="ammount" placeholder="27400" step="1" min="1" max="999999999999" required)
+                .form__row.mb-4.mt-6 Źródło finansowania: 
+                    .form__row.mb-4.mt-2.ml-2
+                        p.form__text.mb-2 Środki IPCZD:
+                        .ml-2
+                            label.form__label.mb-2.mt-2 Udział w finansowaniu (%)
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="ipczd_finance" placeholder="0" min="0" max="100" step="1" required) 
+                        .ml-2
+                            label.form__label.mb-2.mt-2 Nazwa
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="ipczd_name")
+                    .form__row.mb-4.mt-2.ml-2  
+                        p.form__text.mb-2 Obszar nauki/projekt: 
+                        div.ml-2
+                            label.form__label.mb-2.mt-2 Udział w finansowaniu (%)
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="area_finance" placeholder="0" min="0" max="100" step="1" required)
+                        .ml-2    
+                            label.form__label.mb-2.mt-2 Nazwa
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="area_name")
+                    .form__row.mb-4.ml-2
+                        p.form__text.mb-2 Darowizna:
+                        .ml-2
+                            label.form__label.mb-2.mt-2 Udział w finansowaniu (%)
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="donation_finance" placeholder="0" min="0" max="100" step="1" required)
+                        .ml-2
+                            label.form__label.mb-2.mt-2 Nazwa
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="donation_name")
+                    .form__row.mb-4.ml-2
+                        p.form__text.mb-2 Inne środki:
+                        .ml-2
+                            label.form__label.mb-2.mt-2 Udział w finansowaniu (%)
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="other_finance" placeholder="0" min="0" max="100" step="1" required)
+                        .ml-2
+                            label.form__label.mb-2.mt-2 Nazwa
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="other_name")
+                .form__row.mb-4.relative.inline-block.w-full.text-gray-700
+                    label.form__label.mb-2 Charakter wykorzystania inwestycji:
+                    select(class="form__select w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" name="investment_type" required)
+                        option(selected disabled) Wybierz...
+                        option(value="Wymiana/odtworzenie") Wymiana/odtworzenie
+                        option(value="Zwiększenie działalności") Zwiększenie działalności
+                        option(value="Nowa działalność (technologia)") Nowa działalność (technologia)
+                    .absolute.inset-y-0.right-0.flex.items-center.px-2.pointer-events-none
+                        svg.w-4.h-4.fill-current(viewBox="0 0 20 20")
+                            path(d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd")
+                .form__row.mb-4.mt-2   
+                    label.form__label.mb-2(data-mode) Uzasadnienie merytoryczne potrzeby nabycia inwestycji:
+                    textarea(class="form__textarea w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="3" name="justification" required placeholder="Inwestycja jest potrzebna ze względu na...")
+                .form__row.mb-4.mt-2
+                    label.form__label.mb-2 Wymogi prawne/płatnika:
+                    input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="law_requirements" placeholder="Tak(jaki akt):... / Nie" required)
+                .form__row.mb-4.mt-6 Świadczenia planowane do wykonania dzieki nabyciu inwestycji: 
+                    .form__row.mb-4.mt-2.ml-2
+                        p.form__text.mb-2 Rodzaj świadczeń:
+                        .ml-2
+                            label.form__label.mb-2.mt-2 JGP(jakie):
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="jgp" placeholder="..." required) 
+                        .ml-2
+                            label.form__label.mb-2.mt-2 ICD9(jakie):
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="icd9" required)
+                    .form__row.mb-4.mt-2.ml-2  
+                        p.form__text.mb-2 Płatnik:
+                        .ml-2
+                            label.form__label.mb-2.mt-2 NFZ
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="nfz" placeholder="..." required)
+                        .ml-2    
+                            label.form__label.mb-2.mt-2 Świadczenia komercyjne
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="comercial" placeholder="..." required)
+                        .ml-2
+                            label.form__label.mb-2.mt-2 Obszar naukowy
+                            input.form__input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="science_area" placeholder="..." required)
+                .form__row.mb-4.mt-2
+                    label.form__label.mb-2 Czy uzyskiwane będą dodatkowe przychody dzięki inwestycji:
+                    .form__radio.ml-2
+                        label.inline-flex.items-center
+                            input.form__input.form-radio(type="radio" name="income" value="tak" required)
+                            span.radio__text.ml-2 Tak
+                    .form__radio.ml-2
+                        label.inline-flex.items-center
+                            input.form__input.form-radio(type="radio" name="income" value="nie" required)
+                            span.radio__text.ml-2 Nie
+                .form_row.mb-4.mt-6 Dodatkowe zasoby potrzebne do użytkowania inwestycji:
+                    .form__row.mb-4.mt-2.ml-2
+                        p.form__text.mb-2 Czy potrzebne są dodatkowe zasoby Materiałowe: 
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="material_resources" value="tak" required)
+                                span.radio__text.ml-2 Tak
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="material_resources" value="nie" required)
+                                span.radio__text.ml-2 Nie
+                    .form__row.mb-4.mt-2.ml-2
+                        p.form__text.mb-2 Czy potrzebne są dodatkowe zasoby personelu: 
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="staff_resources" value="tak" required)
+                                span.radio__text.ml-2 Tak
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="staff_resources" value="nie" required)
+                                span.radio__text.ml-2 Nie
+                    .form__row.mb-4.mt-2.ml-2
+                        p.form__text.mb-2 Czy potrzebne są dodatkowe zasoby szkoleniowe: 
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="training_resources" value="tak" required)
+                                span.radio__text.ml-2 Tak
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="training_resources" value="nie" required)
+                                span.radio__text.ml-2 Nie
+                    .form__row.mb-4.mt-2.ml-2
+                        p.form__text.mb-2 Czy potrzebne są inne dodatkowe zasoby: 
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="other_resources" value="tak" required)
+                                span.radio__text.ml-2 Tak
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="other_resources" value="nie" required)
+                                span.radio__text.ml-2 Nie
+                    .form__row.mb-4.mt-2.ml-2
+                        p.form__text.mb-2 Czy potrzebne są zmiany w pomieszczeniach: 
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="require_rooms_change" value="tak" required)
+                                span.radio__text.ml-2 Tak
+                        .form__radio.ml-2
+                            label.inline-flex.items-center
+                                input.form__input.form-radio(type="radio" name="require_rooms_change" value="nie" required)
+                                span.radio__text.ml-2 Nie
+                    .form__row.mb-4.mt-2.ml-2 
+                        label.form__label Czy potrzebne są zmiany organizacyjne
+                        textarea(class="form__textarea w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="3" name="reqire_organization_change" required placeholder="Tak(jakie)... / Nie")
+                .form__row.mb-4.mt-2
+                    label.form__label.mb-2 Oczekiwany termin dostawy (rrrr.mm.dd):
+                    input(class="form__input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="2021.12.22" type="text" name="arrival_date")
+                .form__row.mb-4.mt-2   
+                    label.form__label.mb-2(data-mode) Uzasadnienie terminu dostawy:
+                    textarea(class="form__textarea w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="3" name="arrival_description" required placeholder="Termin dostawy może się wydłużyć ze względu na...")
+                .form__row.mb-4.mt-2   
+                    label.form__label.mb-2(data-mode) Osoba merytoryczna ze strony wnioskującego, telefon, e-mail
+                    textarea(class="form__textarea w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="3" name="responsible_person" required placeholder="Jadwiga Kłek, 123-123-123, email@...")
+                .flex.items-center.justify-center.mt-8
+                    button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit") Wyślij
+            p.text-center.text-gray-500.text-xs.mb-6.mt-6 &copy;2021 Harvel, All rights reserved.
